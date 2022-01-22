@@ -20,4 +20,3 @@
 #
 
 require 'ronin/web/proxy/proxy'
-require 'ronin/web/proxy/web'
