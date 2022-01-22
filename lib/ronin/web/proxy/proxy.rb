@@ -189,8 +189,8 @@ module Ronin
       #   Specifies whether to demonize the server.
       #
       def run!(options={})
-        host = (options.delete(:host)   || self.class.host)
-        port = (options.delete(:port)   || self.class.port)
+        host = (options.delete(:host) || self.class.host)
+        port = (options.delete(:port) || self.class.port)
 
         rack_options = options.merge(
           app:  self,
