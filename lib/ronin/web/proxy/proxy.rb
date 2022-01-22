@@ -220,9 +220,6 @@ module Ronin
       # @api private
       #
       def quit!(server,handler)
-        host = server.options[:Host]
-        port = server.options[:Port]
-
         # Use thins' hard #stop! if available, otherwise just #stop
         handler.respond_to?(:stop!) ? handler.stop! : handler.stop
       end
