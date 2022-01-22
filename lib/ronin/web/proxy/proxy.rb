@@ -203,8 +203,6 @@ module Ronin
         server.start do |handler|
           trap(:INT)  { quit!(server,handler) }
           trap(:TERM) { quit!(server,handler) }
-
-          print_info "Starting Proxy on #{host}:#{port} ..."
         end
 
         return self
@@ -227,8 +225,6 @@ module Ronin
 
         # Use thins' hard #stop! if available, otherwise just #stop
         handler.respond_to?(:stop!) ? handler.stop! : handler.stop
-
-        print_info "Stopping Web Proxy on #{host}:#{port}"
       end
 
       #
