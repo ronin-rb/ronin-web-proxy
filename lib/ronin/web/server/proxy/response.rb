@@ -23,12 +23,14 @@ require 'ronin/web/server/response'
 
 module Ronin
   module Web
-    class Proxy
-      #
-      # Convenience class that represents proxied responses.
-      #
-      class Response < Server::Response
+    module Server
+      class Proxy
+        #
+        # Convenience class that represents proxied responses.
+        #
+        class Response < Server::Response
 
+        end
       end
     end
   end
