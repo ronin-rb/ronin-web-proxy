@@ -47,8 +47,6 @@ module Ronin
       #       end
       #     end
       #
-      # @since 0.3.0
-      #
       # @api semipublic
       #
       class Proxy

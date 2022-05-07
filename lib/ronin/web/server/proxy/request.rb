@@ -28,8 +28,6 @@ module Ronin
         #
         # Convenience class that represents proxied requests.
         #
-        # @since 0.3.0
-        #
         class Request < Server::Request
 
           #
