@@ -249,7 +249,7 @@ module Ronin
 
           @on_request_block.call(request) if @on_request_block
 
-          print_debug "Proxying #{request.url} for #{request.address}"
+          print_debug "Proxying #{request.url} for #{request.ip_with_port}"
           request.headers.each do |name,value|
             print_debug "  #{name}: #{value}"
           end
@@ -263,7 +263,7 @@ module Ronin
             end
           end
 
-          print_debug "Returning proxied response for #{request.address}"
+          print_debug "Returning proxied response for #{request.ip_with_port}"
           response.headers.each do |name,value|
             print_debug "  #{name}: #{value}"
           end
