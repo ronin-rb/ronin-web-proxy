@@ -21,8 +21,8 @@
 
 require 'ronin/web/server/proxy/request'
 require 'ronin/web/server/proxy/response'
-require 'ronin/network/http'
-require 'ronin/ui/output/helpers'
+require 'ronin/support/network/http'
+require 'ronin/support/cli/printing'
 
 require 'rack/server'
 require 'set'
@@ -51,8 +51,8 @@ module Ronin
       #
       class Proxy
 
-        include Ronin::Network::HTTP
-        include Ronin::UI::Output::Helpers
+        include Ronin::Support::Network::HTTP
+        include Ronin::Support::CLI::Printing
 
         # Default host the Proxy will bind to
         DEFAULT_HOST = '0.0.0.0'
