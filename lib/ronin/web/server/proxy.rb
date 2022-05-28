@@ -172,26 +172,17 @@ module Ronin
         #
         # Runs the proxy as a standalone Web Server.
         #
-        # @param [Hash] options
-        #   Additional options.
-        #
-        # @option options [String] :host (DEFAULT_HOST)
+        # @param [String] host
         #   The host to bind to.
         #
-        # @option options [Integer] :port (DEFAULT_PORT)
+        # @param [Integer] port
         #   The port to listen on.
         #
-        # @option options [String] :server (DEFAULT_SERVER)
-        #   The Web Server to run on.
+        # @param [Hash{Symbol => Object}] rack_options
+        #   Additional options to pass to [Rack::Server.new](https://rubydoc.info/gems/rack/Rack/Server#initialize-instance_method).
         #
-        # @option options [Boolean] :daemonize (false)
-        #   Specifies whether to demonize the server.
-        #
-        def run!(options={})
-          host = (options.delete(:host) || self.class.host)
-          port = (options.delete(:port) || self.class.port)
-
-          rack_options = options.merge(
+        def run!(host: self.class.host, port: self.class.port, **rack_options)
+          rack_options = rack_options.merge(
             app:  self,
             Host: host,
             Port: port
