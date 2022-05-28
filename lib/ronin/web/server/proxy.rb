@@ -52,7 +52,7 @@ module Ronin
       #     
       #     proxy.run!
       #
-      # @api semipublic
+      # @api public
       #
       class Proxy
 
@@ -145,8 +145,6 @@ module Ronin
         # @return [Proxy]
         #   The proxy app.
         #
-        # @api public
-        #
         def on_request(&block)
           @on_request_block = block
           return self
@@ -166,8 +164,6 @@ module Ronin
         #
         # @return [Proxy]
         #   The proxy app.
-        #
-        # @api public
         #
         def on_response(&block)
           @on_response_block = block
