@@ -11,11 +11,11 @@ proxy = Ronin::Web::Proxy.new do |proxy|
 
     request.headers.each do |name,value|
       log.puts "#{name}: #{value}"
-    end  
+    end
 
     log.puts request.params.inspect
     log.flush
-  end  
-end  
+  end
+end
 
 proxy.run!
