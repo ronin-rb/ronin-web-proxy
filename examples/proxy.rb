@@ -16,6 +16,10 @@ proxy = Ronin::Web::Proxy.new do |proxy|
     log.puts request.params.inspect
     log.flush
   end
+
+  proxy.on_response do |response|
+    # ...
+  end
 end
 
 proxy.run!
