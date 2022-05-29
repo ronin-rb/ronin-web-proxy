@@ -19,6 +19,7 @@ capable of rewriting requests and responses as they pass through.
 ## Features
 
 * Allows rewriting HTTP requests and responses.
+* Can be used in [Sinatra] or [ronin-web-server] apps.
 * [Rack] compatible.
 
 ## Examples
@@ -50,12 +51,14 @@ end
 proxy.run!
 ```
 
-Using `Ronin::Web::Proxy` with `Ronin::Web::Server`:
+Using `Ronin::Web::Proxy` with [Sinatra] apps:
 
 ```ruby
-require 'ronin/web/server'
+require 'ronin/web/proxy/mixin'
 
-class App < Ronin::Web::Server::Base
+class App < Sinatra::Base
+
+  include Ronin::Web::Proxy::Mixin
 
   proxy '/sigin' do |proxy|
     proxy.on_request do |reqquest|
@@ -129,4 +132,5 @@ along with ronin-web-proxy.  If not, see <https://www.gnu.org/licenses/>.
 
 [Ruby]: https://www.ruby-lang.org
 [Rack]: https://github.com/rack/rack#readme
+[Sinatra]: https://sinatrarb.com/
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme

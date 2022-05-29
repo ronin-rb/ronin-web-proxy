@@ -25,13 +25,25 @@ module Ronin
   module Web
     class Proxy
       #
-      # Adds additional routing class methods for [Ronin::Web::Server]  apps.
+      # Adds additional routing class methods for [Sinatra] apps.
       #
-      # [Ronin::Web::Server]: https://github.com/ronin-rb/ronin-web-server#readme
+      # [Sinatra]: http://sinatrarb.com/
+      #
+      # ## Example
+      #
+      #     require 'ronin/web/proxy/mixin'
+      #     
+      #     include Ronin::Web::Proxy::Mixin
+      #     
+      #     proxy '/signin' do |proxy|
+      #       proxy.on_response do |response|
+      #         response.body.gsub(/https/,'http')
+      #       end
+      #     end
       #
       # @api semipublic
       #
-      module Routing
+      module Mixin
         def self.included(base)
           base.extend ClassMethods
         end
@@ -65,8 +77,14 @@ module Ronin
           #
           def proxy(path='*',conditions={},&block)
             proxy = Proxy.new(&block)
+            route = ->{ proxy.call(env) }
 
-            any(path,conditions) { proxy.call(env) }
+            get(path,conditions,&route)
+            post(path,conditions,&route)
+            put(path,conditions,&route)
+            patch(path,conditions,&route)
+            delete(path,conditions,&route)
+            options(path,conditions,&route)
           end
         end
       end

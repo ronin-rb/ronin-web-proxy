@@ -19,13 +19,13 @@
 # along with ronin-web-proxy.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/proxy/routing'
+require 'ronin/web/proxy/mixin'
 
 module Ronin
   module Web
     module Server
       class Base
-        include Proxy::Routing
+        include Proxy::Mixin
       end
     end
   end
