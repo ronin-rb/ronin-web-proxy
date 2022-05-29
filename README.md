@@ -23,6 +23,8 @@ capable of rewriting requests and responses as they pass through.
 
 ## Examples
 
+Start a basic logging project:
+
 ```ruby
 require 'ronin/web/proxy'
 
@@ -42,6 +44,28 @@ proxy = Ronin::Web::Proxy.new do |proxy|
 end  
 
 proxy.run!
+```
+
+Using `Ronin::Web::Proxy` with `Ronin::Web::Server`:
+
+```ruby
+require 'ronin/web/server'
+
+class App < Ronin::Web::Server::Base
+
+  proxy '/sigin' do |proxy|
+    proxy.on_request do |reqquest|
+      # ...
+    end
+
+    proxy.on_response do |response|
+      # ...
+    end
+  end
+
+end
+
+App.run!
 ```
 
 ## Requirements
