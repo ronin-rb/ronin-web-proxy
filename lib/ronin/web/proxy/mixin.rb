@@ -37,7 +37,7 @@ module Ronin
       #     
       #     proxy '/signin' do |proxy|
       #       proxy.on_response do |response|
-      #         response.body.gsub(/https/,'http')
+      #         response.body.gsub!(/https/,'http')
       #       end
       #     end
       #
@@ -67,7 +67,7 @@ module Ronin
           # @example
           #   proxy '/signin' do |proxy|
           #     proxy.on_response do |response|
-          #       response.body.gsub(/https/,'http')
+          #       response.body.gsub!(/https/,'http')
           #     end
           #   end
           #
