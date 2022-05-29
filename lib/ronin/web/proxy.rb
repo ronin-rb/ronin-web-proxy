@@ -266,8 +266,6 @@ module Ronin
         return response
       end
 
-      protected
-
       #
       # Proxies a request.
       #
