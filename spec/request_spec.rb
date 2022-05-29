@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'ronin/web/server/proxy/request'
+require 'ronin/web/proxy/request'
 
-describe Ronin::Web::Server::Proxy::Request do
+describe Ronin::Web::Proxy::Request do
   it "must provide the same methods as Ronin::Web::Server::Request" do
     expect(described_class).to be < Ronin::Web::Server::Request
   end

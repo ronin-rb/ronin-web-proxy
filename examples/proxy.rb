@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require 'ronin/web/server/proxy'
+require 'ronin/web/proxy'
 
 log = File.new('log.txt','w+')
 
-proxy = Ronin::Web::Server::Proxy.new do |proxy|
+proxy = Ronin::Web::Proxy.new do |proxy|
   proxy.on_request do |request|
     log.puts "[#{request.ip} -> #{request.host_with_port}] #{request.request_method} #{request.url}"
 
