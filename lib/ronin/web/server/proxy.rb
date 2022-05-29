@@ -19,12 +19,13 @@
 # along with ronin-web-proxy.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+require 'ronin/web/server/base'
 require 'ronin/web/proxy/mixin'
 
 module Ronin
   module Web
     module Server
-      class Base
+      class Base < Sinatra::Base
         include Proxy::Mixin
       end
     end
