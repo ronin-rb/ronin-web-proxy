@@ -30,7 +30,7 @@ require 'set'
 module Ronin
   module Web
     #
-    # A Rack application for proxying requests.
+    # A Rack application for Man-in-the-Middle (MITM proxying HTTP requests.
     #
     #     require 'ronin/web/proxy'
     #     
