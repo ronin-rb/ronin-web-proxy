@@ -85,6 +85,8 @@ module Ronin
       #   The new proxy object.
       #
       def initialize
+        @connections = {}
+
         yield self if block_given?
       end
 
@@ -266,6 +268,31 @@ module Ronin
       end
 
       #
+      # Creates a new connection or fetches an existing connection.
+      #
+      # @param [String] host
+      #   The host to connect to.
+      #
+      # @param [Integer] port
+      #   The port to connect to.
+      #
+      # @param [Boolean] ssl
+      #   Indicates whether to use SSL.
+      #
+      # @return [Ronin::Support::Network::HTTP]
+      #   The HTTP connection.
+      #
+      # @api private
+      #
+      def connection(host,port, ssl: nil)
+        key = [host,port,ssl]
+
+        @connections.fetch(key) do
+          @connections[key] = Support::Network::HTTP.new(host,port, ssl: ssl)
+        end
+      end
+
+      #
       # Proxies a request.
       #
       # @param [ProxyRequest] request
@@ -286,8 +313,7 @@ module Ronin
         headers = request.headers
         body    = request.body.read
 
-        http = Support::Network::HTTP.new(host,port, ssl: ssl)
-
+        http = connection(host,port,ssl: ssl)
         http_response = http.request(method,path, query:   query,
                                                   headers: headers,
                                                   body:    body)
