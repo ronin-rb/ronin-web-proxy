@@ -21,7 +21,7 @@
 
 require 'ronin/web/proxy/request'
 require 'ronin/web/proxy/response'
-require 'ronin/support/network/mixins/http'
+require 'ronin/support/network/http'
 require 'ronin/support/cli/printing'
 
 require 'rack/server'
@@ -59,7 +59,6 @@ module Ronin
     #
     class Proxy
 
-      include Ronin::Support::Network::Mixins::HTTP
       include Ronin::Support::CLI::Printing
 
       # Default host the Proxy will bind to
@@ -278,21 +277,21 @@ module Ronin
       # @api private
       #
       def proxy(request)
-        kwargs = {
-          ssl:          (request.scheme == 'https'),
-          host:         request.host,
-          port:         request.port,
-          method:       request.request_method,
-          path:         request.path_info,
-          query:        request.query_string,
-          headers:      request.headers
-        }
+        host    = request.host
+        port    = request.port
+        ssl     = request.scheme == 'https'
+        method  = request.request_method.downcase.to_sym
+        path    = request.path
+        query   = request.query_string
+        headers = request.headers
+        body    = request.body.read
 
-        if request.form_data?
-          kwargs[:form_data] = request.POST
-        end
+        http = Support::Network::HTTP.new(host,port, ssl: ssl)
 
-        http_response = http_request(**kwargs)
+        http_response = http.request(method,path, query:   query,
+                                                  headers: headers,
+                                                  body:    body)
+
         http_headers = {}
 
         http_response.each_capitalized do |name,value|
@@ -301,11 +300,9 @@ module Ronin
           end
         end
 
-        return Response.new(
-          (http_response.body || ''),
-          http_response.code,
-          http_headers
-        )
+        return Response.new(http_response.body || '',
+                            http_response.code,
+                            http_headers)
       end
 
     end
